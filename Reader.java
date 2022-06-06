@@ -2,19 +2,14 @@ public class Reader extends Thread {
   int myName; 
   RandomSleep rSleep; 
 
-
-
   public Reader(int name) {
     myName = name; 
     rSleep = new RandomSleep();
   }
 
-
-
   public void run () {
     for (int I = 0;  I < 5; I++) {
-      System.out.println("Reader " + myName + " wants to read.  "
-                         + "Beforehand, readcount is "  + Synch.readcount);
+      System.out.println("Reader " + myName + " wants to read.  " + "Beforehand, readcount is "  + Synch.readcount);
 
       try{
       	Synch.z.acquire();
@@ -25,8 +20,8 @@ public class Reader extends Thread {
       		}
       		catch(Exception e) {}
 
-
             Synch.readcount++;
+
             if (Synch.readcount==1){
           	  try{
           		  Synch.wsem.acquire();
@@ -40,10 +35,8 @@ public class Reader extends Thread {
       }
       catch(Exception e){}
 
-      System.out.println("Reader " + myName + " is now reading.  "
-                         + "Readcount is " + Synch.readcount);
+      System.out.println("Reader " + myName + " is now reading.  " + "Readcount is " + Synch.readcount);
       Synch.z.release();
-
       rSleep.doSleep(1, 200);
 
       try{
@@ -51,8 +44,8 @@ public class Reader extends Thread {
       }
       catch(Exception e){}
       Synch.readcount--;
-      System.out.println("Reader " + myName + " is finished reading.  "
-                         + "Readcount decremented to " + Synch.readcount);
+
+      System.out.println("Reader " + myName + " is finished reading.  " + "Readcount decremented to " + Synch.readcount);
       if (Synch.readcount==0) Synch.wsem.release();
       Synch.x.release();
 

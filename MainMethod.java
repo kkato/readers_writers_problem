@@ -28,7 +28,6 @@ public class MainMethod {
 	  Synch.y = new Semaphore(1, true);
 	  Synch.z = new Semaphore(1, true);
 
-
     Reader R; 
     Writer W; 
 
